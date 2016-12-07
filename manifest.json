@@ -1,0 +1,45 @@
+{
+  "manifest_version": 2,
+  "name": "Sidebar",
+  "description": "This extension search for dress",
+  "version": "1.0",
+  "browser_action": {
+    "name": "Sidebar"
+  },
+  "permissions": [
+    "notifications",
+    "tabs",
+    "activeTab"
+  ],
+  "background": {
+    "scripts": [
+      "node_modules/jquery/dist/jquery.min.js",
+      "app/business/injects/messages/message.js",
+      "app/business/injects/messages/frameOptions.js",
+      "app/business/injects/messages/sidebarOptions.js",
+      "extension.js"
+    ],
+    "persists": true
+  },
+  "content_scripts": [
+    {
+      "matches": ["<all_urls>"],
+      "js":[
+        "node_modules/jquery/dist/jquery.min.js",
+        "app/business/injects/controllers/tabController.js",
+        "app/business/injects/messages/Message.js",
+        "app/business/injects/messages/sidebarOptions.js",
+        "app/business/injects/messages/frameOptions.js",
+        "app/business/injects/utils/utils.js"
+      ],
+      "css": [
+        "app/assets/styles/frame-sidebar.css"
+      ],
+      "run_at": "document_end",
+      "all_frames": false
+    }
+  ],
+  "web_accessible_resources": [
+    "app/assets/contents/sidebar.html"
+  ]
+}

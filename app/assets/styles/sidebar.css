@@ -1,0 +1,219 @@
+body {
+  background-color: transparent !important;
+}
+body #sidebar-wrapper {
+  padding: 0;
+  z-index: 9999;
+  background: #f3f3f3;
+  -webkit-box-shadow: 0 -3px 15px 0 rgba(0, 0, 0, 0.41);
+  -moz-box-shadow: 0 -3px 15px 0 rgba(0, 0, 0, 0.41);
+  box-shadow: 0 -3px 15px 0 rgba(0, 0, 0, 0.41);
+  -webkit-transition: height 0.5s, width 0.5s;
+  transition: height 0.5s, width 0.5s;
+}
+body #sidebar-wrapper .tooltip {
+  white-space: nowrap;
+}
+body #sidebar-wrapper #menu-wrapper {
+  position: absolute;
+}
+body #sidebar-wrapper #menu-wrapper label {
+  padding: 7px 6px 6px;
+  margin: 0;
+}
+body #sidebar-wrapper #menu-wrapper .dropdown,
+body #sidebar-wrapper #menu-wrapper .dropup {
+  display: inline;
+}
+body #sidebar-wrapper #menu-wrapper #menu-right {
+  float: right;
+}
+body #sidebar-wrapper #menu-wrapper #menu-right .menu-button {
+  float: right;
+}
+body #sidebar-wrapper #menu-wrapper #menu-right > .menu-button {
+  margin-top: -1px;
+}
+body #sidebar-wrapper #menu-wrapper #menu-right .menu-button.menu-button-rotateble {
+  margin-top: 0;
+}
+body #sidebar-wrapper #menu-wrapper #menu-right .dropdown,
+body #sidebar-wrapper #menu-wrapper #menu-right .dropup {
+  float: right;
+}
+body #sidebar-wrapper #menu-wrapper #menu-right .dropdown .dropdown-toggle,
+body #sidebar-wrapper #menu-wrapper #menu-right .dropup .dropdown-toggle {
+  border: none;
+}
+body #sidebar-wrapper #menu-wrapper #menu-right .dropdown .menu-button,
+body #sidebar-wrapper #menu-wrapper #menu-right .dropup .menu-button {
+  color: #5a5a5a;
+  font-size: 1.3em;
+  cursor: pointer;
+  padding: 6px;
+}
+body #sidebar-wrapper #menu-wrapper #menu-right .dropdown .menu-button:hover,
+body #sidebar-wrapper #menu-wrapper #menu-right .dropup .menu-button:hover {
+  background-color: #e5e5e5;
+}
+body #sidebar-wrapper #menu-wrapper #menu-right .dropdown .dropdown-menu,
+body #sidebar-wrapper #menu-wrapper #menu-right .dropup .dropdown-menu {
+  margin: 0 0 0 -1.5px;
+  border: 1px solid #dddddd;
+  border-radius: 2px;
+  padding: 0;
+  background-color: #f3f3f3;
+}
+body #sidebar-wrapper #menu-wrapper #menu-right .dropdown .dropdown-menu .dropdown-item,
+body #sidebar-wrapper #menu-wrapper #menu-right .dropup .dropdown-menu .dropdown-item {
+  display: block;
+  height: 29px;
+}
+body #sidebar-wrapper #menu-wrapper #menu-right .dropdown .dropdown-menu .dropdown-item .menu-button,
+body #sidebar-wrapper #menu-wrapper #menu-right .dropup .dropdown-menu .dropdown-item .menu-button {
+  margin-top: -1px;
+}
+body #sidebar-wrapper #menu-wrapper #menu-left {
+  float: left;
+}
+body #sidebar-wrapper #menu-wrapper #menu-left .menu-button {
+  float: left;
+}
+body #sidebar-wrapper #menu-wrapper #menu-left > .menu-button {
+  margin-top: -1px;
+}
+body #sidebar-wrapper #menu-wrapper #menu-left > .menu-button.menu-button-rotateble {
+  margin-top: 0;
+}
+body #sidebar-wrapper #menu-wrapper #menu-left .dropdown,
+body #sidebar-wrapper #menu-wrapper #menu-left .dropup {
+  float: left;
+}
+body #sidebar-wrapper #menu-wrapper #menu-left .dropdown .dropdown-toggle,
+body #sidebar-wrapper #menu-wrapper #menu-left .dropup .dropdown-toggle {
+  border: none;
+}
+body #sidebar-wrapper #menu-wrapper #menu-left .dropdown .menu-button,
+body #sidebar-wrapper #menu-wrapper #menu-left .dropup .menu-button {
+  color: #5a5a5a;
+  font-size: 1.3em;
+  cursor: pointer;
+  padding: 6px;
+}
+body #sidebar-wrapper #menu-wrapper #menu-left .dropdown .menu-button:hover,
+body #sidebar-wrapper #menu-wrapper #menu-left .dropup .menu-button:hover {
+  background-color: #e5e5e5;
+}
+body #sidebar-wrapper #menu-wrapper #menu-left .dropdown .dropdown-menu,
+body #sidebar-wrapper #menu-wrapper #menu-left .dropup .dropdown-menu {
+  margin: 0;
+  border: 1px solid #dddddd;
+  border-radius: 2px;
+  padding: 0;
+  background-color: #f3f3f3;
+}
+body #sidebar-wrapper #menu-wrapper #menu-left .dropdown .dropdown-menu .dropdown-item,
+body #sidebar-wrapper #menu-wrapper #menu-left .dropup .dropdown-menu .dropdown-item {
+  display: block;
+  height: 29px;
+}
+body #sidebar-wrapper #menu-wrapper #menu-left .dropdown .dropdown-menu .dropdown-item .menu-button,
+body #sidebar-wrapper #menu-wrapper #menu-left .dropup .dropdown-menu .dropdown-item .menu-button {
+  margin-top: -1px;
+}
+body #sidebar-wrapper #menu-wrapper .menu-button {
+  color: #5a5a5a;
+  font-size: 1.3em;
+  cursor: pointer;
+  padding: 6px;
+  width: 29px;
+  height: 29px;
+}
+body #sidebar-wrapper #menu-wrapper .menu-button .glyphicon {
+  top: -2px;
+}
+body #sidebar-wrapper #menu-wrapper .menu-button:hover {
+  background-color: #e5e5e5;
+}
+body #sidebar-wrapper.bottom {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 0;
+}
+body #sidebar-wrapper.bottom #sidebar-resizer {
+  position: absolute;
+  top: -5px;
+  left: 0;
+  right: 0;
+  height: 10px;
+  cursor: ns-resize;
+}
+body #sidebar-wrapper.bottom #sidebar-resizer-pro {
+  height: 200px;
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: -200px;
+}
+body #sidebar-wrapper.bottom #menu-wrapper {
+  top: 0;
+  left: 0;
+  right: 0;
+  background: #f4f4f4;
+  border-bottom: 1px solid #dddddd;
+}
+body #sidebar-wrapper.bottom #sidebar-resizer,
+body #sidebar-wrapper.bottom #sidebar-resizer-pro {
+  z-index: 9999;
+}
+body #sidebar-wrapper.bottom #content-wrapper {
+  position: absolute;
+  top: 30px;
+  bottom: 0;
+  left: 0;
+  right: 0;
+}
+body #sidebar-wrapper.right {
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  right: 0;
+  width: 0;
+}
+body #sidebar-wrapper.right #sidebar-resizer {
+  position: absolute;
+  left: -5px;
+  top: 0;
+  bottom: 0;
+  width: 10px;
+  cursor: ew-resize;
+}
+body #sidebar-wrapper.right #sidebar-resizer-pro {
+  width: 200px;
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: -200px;
+}
+body #sidebar-wrapper.right #menu-wrapper {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  width: 30px;
+  background: #f4f4f4;
+  border-right: 1px solid #dddddd;
+}
+body #sidebar-wrapper.right #sidebar-resizer,
+body #sidebar-wrapper.right #sidebar-resizer-pro {
+  z-index: 9999;
+}
+body #sidebar-wrapper.right #content-wrapper {
+  position: absolute;
+  left: 30px;
+  bottom: 0;
+  top: 0;
+  right: 0;
+}
