@@ -35,19 +35,19 @@ var SidebarController = function (sidebarOptions,postChange) {
 
     var initSidebar = function () {
         sidebar = document.getElementById(sidebarWrapperId);
-        restoreStatus();
         initPosition();
         initResizer();
         initButtons();
         initMouseEvent();
         restoreCollapseSidebarButtonRotation();
-        if(self.sidebarOptions.position==SIDEBAR_POSITION_BOTTOM)
-            putSettingsDropdownUp();
+        restoreStatus();
         self.sidebarOptions.inited = true;
     };
 
     var initPosition = function(){
         $('#'+sidebarWrapperId).addClass(self.sidebarOptions.position);
+        if(self.sidebarOptions.position==SIDEBAR_POSITION_BOTTOM)
+            putSettingsDropdownUp();
     };
 
     var initMouseEvent = function(){
@@ -74,15 +74,29 @@ var SidebarController = function (sidebarOptions,postChange) {
     };
 
     var initButtons = function(){
-        $('#'+sidebarWrapperId+' [data-toggle="tooltip"]').tooltip()
-            .on('click',function () {
-                $(this).tooltip('hide');
-            });
+        $('#'+sidebarWrapperId+' [data-toggle="tooltip"]').tooltip({
+            placement: function (tip,el) {
+                if(!$(el).parent().hasClass('dropdown-item')){
+                    if(self.sidebarOptions.position==SIDEBAR_POSITION_BOTTOM) {
+                        return 'top';
+                    } else if(self.sidebarOptions.position==SIDEBAR_POSITION_RIGHT){
+                        return 'left';
+                    }
+                } else {
+                    return 'top';
+                }
+            }
+        }).on('click',function () {
+            $(this).tooltip('hide');
+        });
         $(sidebar).on('click.close', '#close-sidebar', function () {
             side();
+            self.sidebarOptions.mouse = SIDEBAR_MOUSE_ON;
             postChange(self.sidebarOptions);
+            self.sidebarOptions.mouse = null;
         });
         $(sidebar).on('click.collapse', '#collapse-sidebar', function () {
+            var isToOpen = false;
             if(self.sidebarOptions.position==SIDEBAR_POSITION_BOTTOM) {
                 if(self.sidebarOptions.height>SIDEBAR_MIN_HEIGHT){
                     $('#'+resizerId).css({'display': 'none'});
@@ -95,6 +109,7 @@ var SidebarController = function (sidebarOptions,postChange) {
                     self.sidebarOptions.height = beforeCollapseHeight;
                     $(sidebar).css({'height': self.sidebarOptions.height+'px'});
                     $(this).find('.rotateble').css({'-webkit-transform': 'rotate(0deg)'});
+                    isToOpen = true;
                 }
             } else if(self.sidebarOptions.position==SIDEBAR_POSITION_RIGHT){
                 if(self.sidebarOptions.width>SIDEBAR_MIN_WIDTH){
@@ -108,9 +123,13 @@ var SidebarController = function (sidebarOptions,postChange) {
                     self.sidebarOptions.width = beforeCollapseWidth;
                     $(sidebar).css({'width': self.sidebarOptions.width+'px'});
                     $(this).find('.rotateble').css({'-webkit-transform': 'rotate(-90deg)'});
+                    isToOpen = true;
                 }
             }
+            if(isToOpen)
+                self.sidebarOptions.mouse = SIDEBAR_MOUSE_ON;
             postChange(self.sidebarOptions);
+            self.sidebarOptions.mouse = null;
         });
         $(sidebar).on('click.dock.right', '#right-sidebar-button', function () {
             if(self.sidebarOptions.position!=SIDEBAR_POSITION_RIGHT) {
@@ -130,7 +149,9 @@ var SidebarController = function (sidebarOptions,postChange) {
                 restoreCollapseSidebarButtonRotation();
                 putSettingsDropupDown();
             }
+            self.sidebarOptions.mouse = SIDEBAR_MOUSE_ON;
             postChange(self.sidebarOptions);
+            self.sidebarOptions.mouse = null;
         });
         $(sidebar).on('click.dock.bottom', '#bottom-sidebar-button', function () {
             if(self.sidebarOptions.position!=SIDEBAR_POSITION_BOTTOM) {
@@ -150,7 +171,9 @@ var SidebarController = function (sidebarOptions,postChange) {
                 restoreCollapseSidebarButtonRotation();
                 putSettingsDropdownUp();
             }
+            self.sidebarOptions.mouse = SIDEBAR_MOUSE_ON;
             postChange(self.sidebarOptions);
+            self.sidebarOptions.mouse = null;
         });
     };
 
@@ -220,10 +243,17 @@ var SidebarController = function (sidebarOptions,postChange) {
 
     var restoreStatus = function () {
         console.log('restore ', self.sidebarOptions.open);
-        if (self.sidebarOptions.open) {
-            self.sidebarOptions.action = SIDEBAR_ACTION_CLOSE;
-            show();
+        if(self.sidebarOptions.openOnInit) {
+            self.sidebarOptions.openOnInit = false;
+            if (self.sidebarOptions.open) {
+                self.sidebarOptions.action = SIDEBAR_ACTION_CLOSE;
+                show();
+            } else {
+                self.sidebarOptions.action = SIDEBAR_ACTION_OPEN;
+                hide();
+            }
         } else {
+            self.sidebarOptions.open = false;
             self.sidebarOptions.action = SIDEBAR_ACTION_OPEN;
             hide();
         }
@@ -303,6 +333,18 @@ var SidebarController = function (sidebarOptions,postChange) {
             .removeClass('dropup')
             .addClass('dropdown');
     };
+
+    // var putFirstMenuTooltipUpToLeft = function(){
+    //     $('#menu-wrapper')
+    //         .find('div > .menu-button[data-toggle="tooltip"]')
+    //         .attr('data-placement','left');
+    // };
+    //
+    // var putFirstMenuTooltipLeftToUp = function(){
+    //     $('#menu-wrapper')
+    //         .find('div > .menu-button[data-toggle="tooltip"]')
+    //         .attr('data-placement','top');
+    // };
 
     function closeDropdown() {
         var dropdowns = $('.dropdown-toggle');

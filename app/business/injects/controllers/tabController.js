@@ -58,7 +58,7 @@ function handleFrameMessage(message) {
 
 function postFrameMessage(message) {
     var frame = document.getElementById(frameOptions.id).contentWindow;
-    if (message.content.action === SIDEBAR_ACTION_INIT) {
+    if (message.content && message.content.action === SIDEBAR_ACTION_INIT) {
         var initSidebar = function () {
             mouseout(message.content);
             if (message.content.action === SIDEBAR_ACTION_INIT) {
@@ -94,12 +94,27 @@ function mouseon() {
         'right': '0',
         'top': '',
         'width': '100%',
-        'height': '100%'
+        'height': '100%',
+        '-webkit-transition': 'height 0s, width 0s',
+        'transition': 'height 0s, width 0s'
     });
+    resetFrameTransition($frame)
 }
 
 function mouseout(sidebarOptions) {
     var $frame = $('#' + frameOptions.id);
+    var useFrameTransition;
+    if (sidebarOptions.position == SIDEBAR_POSITION_BOTTOM) {
+        useFrameTransition = parseInt($frame.css('height'))<sidebarOptions.height;
+    } else if (sidebarOptions.position == SIDEBAR_POSITION_RIGHT) {
+        useFrameTransition = parseInt($frame.css('width'))<sidebarOptions.width;
+    }
+    if(useFrameTransition) {
+        $frame.css({
+            '-webkit-transition': 'height 0s, width 0s',
+            'transition': 'height 0s, width 0s'
+        });
+    }
     if (sidebarOptions.position == SIDEBAR_POSITION_BOTTOM) {
         var newHeight = sidebarOptions.height + 23;
         $frame.css({
@@ -109,9 +124,13 @@ function mouseout(sidebarOptions) {
             'width': '100%'
         });
         if(sidebarOptions.open){
-            $frame.css({'height': newHeight+'px'});
+            $frame.css({
+                'height': newHeight+'px'
+            });
         } else {
-            $frame.css({'height': '0'});
+            $frame.css({
+                'height': '0'
+            });
         }
     } else if (sidebarOptions.position == SIDEBAR_POSITION_RIGHT) {
         var newWidth = sidebarOptions.width + 23;
@@ -122,9 +141,25 @@ function mouseout(sidebarOptions) {
             'height': '100%'
         });
         if(sidebarOptions.open){
-            $frame.css({'width': newWidth+'px'});
+            $frame.css({
+                'width': newWidth+'px'
+            });
         } else {
-            $frame.css({'width': '0'});
+            $frame.css({
+                'width': '0'
+            });
         }
     }
+    if(useFrameTransition){
+        resetFrameTransition($frame);
+    }
+}
+
+function resetFrameTransition($frame){
+    setTimeout(function () {
+        $frame.css({
+            '-webkit-transition': 'height 0.5s, width 0.5s',
+            'transition': 'height 0.5s, width 0.5s'
+        });
+    },500);
 }

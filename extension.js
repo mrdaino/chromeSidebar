@@ -6,34 +6,36 @@ var frameOptions = new FrameOptions('frame-sidebar',
     chrome.extension.getURL('app/assets/contents/sidebar.html'),
     chrome.extension.getURL(''));
 
+var isOldTab = false;
 var sidebarOptions = new SidebarOptions();
 
 var currentPageBody;
 var currentPageUrl;
-var currentTabId;
 
 //noinspection JSCheckFunctionSignatures
 chrome.browserAction.onClicked.addListener(function (tab) {
     sendSidebarMessage(tab.id);
 });
 
-// noinspection JSCheckFunctionSignatures
-// chrome.tabs.onCreated.addListener(function (tab) {
-//     createSidebarFrame(tabId, function () {
-//         sidebarOptions.action = SIDEBAR_ACTION_INIT;
-//         sendSidebarMessage(tabId);
-//     });
-// });
+//noinspection JSCheckFunctionSignatures
+chrome.tabs.onCreated.addListener(function (tab) {
+    isOldTab = true;
+});
 
 //noinspection JSCheckFunctionSignatures
 chrome.tabs.onUpdated.addListener(function (tabId, changeInfo, tab) {
     if (changeInfo.status == 'complete') {
-        currentTabId = tabId;
-        createSidebarFrame(tabId);
+        createSidebarFrame(tabId,!isOldTab);
+        isOldTab = false;
     }
 });
 
-function createSidebarFrame(tabId) {
+//noinspection JSCheckFunctionSignatures
+chrome.tabs.onActivated.addListener(function (activeInfo) {
+    sendSidebarMessage(activeInfo.tabId,true);
+});
+
+function createSidebarFrame(tabId,openOnInit) {
     chrome.tabs.sendMessage(tabId,
         new Message('add_frame', frameOptions, MESSAGE_WAITING_RESPONSE),
         function (response) {
@@ -43,6 +45,7 @@ function createSidebarFrame(tabId) {
                     currentPageBody = $(response.pageBody);
                 if(response.pageUrl)
                     currentPageUrl = response.pageUrl;
+                sidebarOptions.openOnInit = openOnInit;
                 sidebarOptions.action = SIDEBAR_ACTION_INIT;
                 sendSidebarMessage(tabId);
             }
@@ -50,9 +53,12 @@ function createSidebarFrame(tabId) {
     );
 }
 
-function sendSidebarMessage(tabId) {
+function sendSidebarMessage(tabId,notSendSidebarOptions) {
+    var messageContent = sidebarOptions;
+    if(notSendSidebarOptions)
+        messageContent = null;
     chrome.tabs.sendMessage(tabId,
-        new Message('sidebar_control', sidebarOptions, MESSAGE_WAITING_RESPONSE),
+        new Message('sidebar_control', messageContent, MESSAGE_WAITING_RESPONSE),
         function (response) {
             if (response) {
                 sidebarOptions = response.content;
@@ -60,12 +66,6 @@ function sendSidebarMessage(tabId) {
         }
     );
 }
-
-
-// //noinspection JSCheckFunctionSignatures
-// chrome.tabs.onActivated.addListener(function (activeInfo) {
-//     currentTabId = activeInfo.tabId;
-// });
 
 // noinspection JSCheckFunctionSignatures
 chrome.runtime.onMessage.addListener(function(message,sender,sendResponse){
@@ -75,25 +75,6 @@ chrome.runtime.onMessage.addListener(function(message,sender,sendResponse){
         sendResponse(message);
     }
 });
-
-// function getPageDocument(tabId,send){
-//     chrome.tabs.sendMessage(tabId, new Message('get_document', sidebarOptions),
-//         function (response) {
-//             if (response) {
-//                 send(response.document);
-//             }
-//         }
-//     );
-// }
-
-// function updateTabsIds(tabId) {
-//     for(var i=0;i<tabsIds.length;i++) {
-//         if (tabsIds[i]==tabId){
-//             tabsIds.push(tabId);
-//             break;
-//         }
-//     }
-// }
 
 // function getCurrentTab(callback) {
 //     var queryInfo = {

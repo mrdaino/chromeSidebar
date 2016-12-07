@@ -12,11 +12,13 @@ function handleTabMessage(messageEvent) {
     lastMessageEvent = messageEvent;
     switch (messageEvent.data.type){
         case 'sidebar_control':
-            if(!sidebarController)
-                sidebarController = new SidebarController(messageEvent.data.content,postChange);
-            else
-                sidebarController.sidebarOptions = messageEvent.data.content;
-            sidebarController.doAction();
+            if(messageEvent.data.content) {
+                if (!sidebarController)
+                    sidebarController = new SidebarController(messageEvent.data.content, postChange);
+                else
+                    sidebarController.sidebarOptions = messageEvent.data.content;
+                sidebarController.doAction();
+            }
             postChange(sidebarController.sidebarOptions);
             break;
     }

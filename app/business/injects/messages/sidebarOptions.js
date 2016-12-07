@@ -10,6 +10,7 @@ const SIDEBAR_INIT_HEIGHT = 200,
     SIDEBAR_ACTION_INIT = "ACTION_INIT",
     SIDEBAR_ACTION_OPEN = "ACTION_OPEN",
     SIDEBAR_ACTION_CLOSE = "ACTION_CLOSE",
+    SIDEBAR_NO_ACTION = "NO_ACTION",
     SIDEBAR_POSITION_BOTTOM = 'bottom',
     SIDEBAR_POSITION_RIGHT = 'right',
     SIDEBAR_MOUSE_ON = 'ON',
@@ -43,5 +44,8 @@ var SidebarOptions = function () {
     this.position = SIDEBAR_POSITION_BOTTOM;  // posizione della sidebar
 
     this.mouse = null;    // valorizzato per determinare se sono sopra alla sidebar o no
+
+    this.openOnInit = false;    // usato per definire se all'apertura
+                                // di un tab bisogna aprire anche la sidebar
 
 };
