@@ -1,10 +1,8 @@
-/**
- * Created by Lorenzo Daneo.
- * mail to lorenzo.daneo@coolsholp.it
- */
 
+
+var SIDEBAR_HTML_LOCATION = null;
 try {
-    const SIDEBAR_HTML_LOCATION = chrome.extension.getURL('sidebar/app/assets/contents/sidebar.html');
+    SIDEBAR_HTML_LOCATION = chrome.extension.getURL('sidebar/app/assets/contents/sidebar.html');
 } catch (e){
     console.log('sidebar in default location');
 }

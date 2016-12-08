@@ -4,11 +4,11 @@
 
 var frameOptions;
 
-try {
+if(SIDEBAR_HTML_LOCATION) {
     frameOptions = new FrameOptions('frame-sidebar',
         SIDEBAR_HTML_LOCATION,
         chrome.extension.getURL(''));
-} catch (e){
+} else {
     frameOptions = new FrameOptions('frame-sidebar',
         chrome.extension.getURL('app/assets/contents/sidebar.html'),
         chrome.extension.getURL(''));
