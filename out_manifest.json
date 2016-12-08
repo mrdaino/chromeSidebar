@@ -1,3 +1,4 @@
+// COPY in your ROOT directory
 {
   "manifest_version": 2,
   "name": "Sidebar",
@@ -45,4 +46,6 @@
   "web_accessible_resources": [
     "sidebar/app/assets/contents/sidebar.html"
   ]
+  //content_security_policy => Enable unsafe-eval and unsafe-inline. For unsafe-inline you need sha256
+//  "content_security_policy": "script-src 'self' 'unsafe-eval' 'sha256.....'; object-src 'self'"
 }

@@ -10,7 +10,6 @@ const SIDEBAR_INIT_HEIGHT = 200,
     SIDEBAR_ACTION_INIT = "ACTION_INIT",
     SIDEBAR_ACTION_OPEN = "ACTION_OPEN",
     SIDEBAR_ACTION_CLOSE = "ACTION_CLOSE",
-    SIDEBAR_NO_ACTION = "NO_ACTION",
     SIDEBAR_POSITION_BOTTOM = 'bottom',
     SIDEBAR_POSITION_RIGHT = 'right',
     SIDEBAR_MOUSE_ON = 'ON',
@@ -22,6 +21,8 @@ const SIDEBAR_INIT_HEIGHT = 200,
  * aggiornata tra i controller
  */
 var SidebarOptions = function () {
+
+    this.content = null;  // elemento ti tipo Page (definito in loader.js)
 
     this.inited = false;  //indica se è già stata inizializzata
 

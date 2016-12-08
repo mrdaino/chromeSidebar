@@ -55,6 +55,7 @@ function createSidebarFrame(tabId,openOnInit) {
                     currentPageUrl = response.pageUrl;
                 sidebarOptions.openOnInit = openOnInit;
                 sidebarOptions.action = SIDEBAR_ACTION_INIT;
+                sidebarOptions.content = loadPageToInject();
                 sendSidebarMessage(tabId);
             }
         }

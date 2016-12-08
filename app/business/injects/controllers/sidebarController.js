@@ -41,6 +41,10 @@ var SidebarController = function (sidebarOptions,postChange) {
         initMouseEvent();
         restoreCollapseSidebarButtonRotation();
         restoreStatus();
+        $(document).ready(function () {
+            $(document.head).append($(sidebarOptions.content.head));
+            $('#content-wrapper').append($(sidebarOptions.content.body));
+        });
         self.sidebarOptions.inited = true;
     };
 
