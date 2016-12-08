@@ -1,7 +1,7 @@
 {
   "manifest_version": 2,
   "name": "Sidebar",
-  "description": "This extension search for dress",
+  "description": "Sidebar html injector",
   "version": "1.0",
   "browser_action": {
     "name": "Sidebar"
@@ -27,7 +27,7 @@
       "js":[
         "node_modules/jquery/dist/jquery.min.js",
         "app/business/injects/controllers/tabController.js",
-        "app/business/injects/messages/Message.js",
+        "app/business/injects/messages/message.js",
         "app/business/injects/messages/sidebarOptions.js",
         "app/business/injects/messages/frameOptions.js",
         "app/business/injects/utils/utils.js"
