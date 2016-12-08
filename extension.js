@@ -2,9 +2,17 @@
 // Use of this source code is governed by a BSD-style license that can be
 // found in the LICENSE file.
 
-var frameOptions = new FrameOptions('frame-sidebar',
-    chrome.extension.getURL('app/assets/contents/sidebar.html'),
-    chrome.extension.getURL(''));
+var frameOptions;
+
+try {
+    frameOptions = new FrameOptions('frame-sidebar',
+        SIDEBAR_HTML_LOCATION,
+        chrome.extension.getURL(''));
+} catch (e){
+    frameOptions = new FrameOptions('frame-sidebar',
+        chrome.extension.getURL('app/assets/contents/sidebar.html'),
+        chrome.extension.getURL(''));
+}
 
 var isOldTab = false;
 var sidebarOptions = new SidebarOptions();

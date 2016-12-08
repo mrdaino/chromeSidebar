@@ -1,0 +1,48 @@
+{
+  "manifest_version": 2,
+  "name": "Sidebar",
+  "description": "Sidebar html injector",
+  "version": "1.0",
+  "browser_action": {
+    "name": "Sidebar"
+  },
+  "permissions": [
+    "notifications",
+    "tabs",
+    "activeTab"
+  ],
+  "background": {
+    "scripts": [
+      "sidebar/node_modules/jquery/dist/jquery.min.js",
+      "sidebar/loader.js",
+      "sidebar/app/business/injects/messages/message.js",
+      "sidebar/app/business/injects/messages/frameOptions.js",
+      "sidebar/app/business/injects/messages/sidebarOptions.js",
+      "sidebar/extension.js"
+    ],
+    "persists": true
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "<all_urls>"
+      ],
+      "js": [
+        "sidebar/node_modules/jquery/dist/jquery.min.js",
+        "sidebar/app/business/injects/controllers/tabController.js",
+        "sidebar/app/business/injects/messages/message.js",
+        "sidebar/app/business/injects/messages/sidebarOptions.js",
+        "sidebar/app/business/injects/messages/frameOptions.js",
+        "sidebar/app/business/injects/utils/utils.js"
+      ],
+      "css": [
+        "sidebar/app/assets/styles/frame-sidebar.css"
+      ],
+      "run_at": "document_end",
+      "all_frames": false
+    }
+  ],
+  "web_accessible_resources": [
+    "sidebar/app/assets/contents/sidebar.html"
+  ]
+}
