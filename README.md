@@ -1,9 +1,18 @@
 ## Chrome Extension Sidebar
 
 This is an extension for Google Chrome. A sidebar where you can inject your html code.
-To start to use sidebar you can add this project like a git submodule:
+
+### Download
+
+You can add sidebar to your project like a git submodule:
 ```bash
 git submodule add https://github.com/mrdaino/chromeSidebar.git
+```
+download library through npm
+```bash
+cd /path/your/project/root
+cd sidebar
+npm install
 ```
 and add project folder to you .gitignore
 ```bash
@@ -11,6 +20,7 @@ cd /path/your/project/root
 echo sidebar/ >> .gitignore
 ```
 
+### Start
 
 **1)** Put copy of out_manifest.json file in your root directory
 
