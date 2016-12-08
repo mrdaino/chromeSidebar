@@ -1,10 +1,22 @@
 
 
 var SIDEBAR_HTML_LOCATION = null;
-try {
-    SIDEBAR_HTML_LOCATION = chrome.extension.getURL('sidebar/app/assets/contents/sidebar.html');
-} catch (e){
-    console.log('sidebar in default location');
+var outSidebarLocation = chrome.extension.getURL('sidebar/app/assets/contents/sidebar.html');
+var locationResult = $.ajax({
+    url: outSidebarLocation,
+    type: 'GET',
+    async: false,
+    cache: false,
+    timeout: 30000,
+    error: function(){
+        return false;
+    },
+    success: function(){
+        return true;
+    }
+});
+if(locationResult.status==200){
+    SIDEBAR_HTML_LOCATION = outSidebarLocation;
 }
 
 var Page = function (head, body) {
@@ -35,29 +47,26 @@ function loadPageToInject() {
     var page = null;
     while (!canLoadPageToInject) {} //aspetto che la risorsa sia stata caricata
     if (resource != null) {
-        var result;
-        try {
-            result = $.ajax({
-                url: chrome.extension.getURL(resource),
-                type: 'GET',
-                async: false,
-                cache: false,
-                timeout: 30000,
-                error: function(){
-                    return false;
-                },
-                success: function(pageData){
-                    page = new Page("","");
-                    page.head = /<head.*?>([\s\S]*)<\/head>/.exec(pageData)[1];
-                    page.body = /<body.*?>([\s\S]*)<\/body>/.exec(pageData)[1];
-                    return true;
-                }
-            });
-        } catch (e) {
-            console.log('can\'t get or post page web resource');
+        var result = $.ajax({
+            url: chrome.extension.getURL(resource),
+            type: 'GET',
+            async: false,
+            cache: false,
+            timeout: 30000,
+            error: function(){
+                return false;
+            },
+            success: function(pageData){
+                page = new Page("","");
+                page.head = /<head.*?>([\s\S]*)<\/head>/.exec(pageData)[1];
+                page.body = /<body.*?>([\s\S]*)<\/body>/.exec(pageData)[1];
+                return true;
+            }
+        });
+        if(result.status==200) {
+            return new Page(/<head.*?>([\s\S]*)<\/head>/.exec(result.responseText)[1],
+                /<body.*?>([\s\S]*)<\/body>/.exec(result.responseText)[1]);
         }
-        return new Page(/<head.*?>([\s\S]*)<\/head>/.exec(result.responseText)[1],
-            /<body.*?>([\s\S]*)<\/body>/.exec(result.responseText)[1]);
     }
-    return new Page("","<h1>Nothing to show</h1>");
+    return new Page("","<div>Nothing to show</div>");
 }

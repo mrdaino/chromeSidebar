@@ -1,4 +1,4 @@
-// COPY in your ROOT directory
 {
+  "_comment": "COPY in your ROOT directory",
   "web_resource": "[RESOURCE_TO_POINT_FOR_INJECTION]"
 }
