@@ -4,7 +4,7 @@ This is an extension for Google Chrome. A sidebar where you can inject your html
 
 ### Download
 
-You can add sidebar to your project like a git submodule:
+You can add sidebar to your project like git submodule:
 ```bash
 git submodule add https://github.com/mrdaino/chromeSidebar.git
 ```
@@ -14,7 +14,7 @@ cd /path/your/project/root
 cd sidebar
 npm install
 ```
-and add project folder to you .gitignore
+and add project folder to your .gitignore
 ```bash
 cd /path/your/project/root
 echo sidebar/ >> .gitignore
@@ -27,6 +27,8 @@ echo sidebar/ >> .gitignore
 - Put a copy of sidebar_injector.json in your root directory (not rename it!)
 - Replace content "[RESOURCE_TO_POINT_FOR_INJECTION]" with location your index.html file
 - jQuery and Twitter Bootstrap are already included
+
+
 
 
 **N.B:** If your index.html file have script tag to file .js, you need to put sha256 code
