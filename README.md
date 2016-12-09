@@ -25,11 +25,10 @@ echo sidebar/ >> .gitignore
 - Put copy of out_manifest.json file in your root directory
 - Rename it to manifest.json
 - Put a copy of sidebar_injector.json in your root directory (not rename it!)
-- Replace content "[RESOURCE_TO_POINT_FOR_INJECTION]" with location your index.html file
+- Replace content "\[RESOURCE_TO_POINT_FOR_INJECTION\]" with location of your index.html file
 - jQuery and Twitter Bootstrap are already included
 
-
-
+##
 
 **N.B:** If your index.html file have script tag to file .js, you need to put sha256 code
 in your manifest "content_security_policy" property. (Example in out_manifest.json)

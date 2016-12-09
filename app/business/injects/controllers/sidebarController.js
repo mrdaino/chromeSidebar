@@ -100,7 +100,7 @@ var SidebarController = function (sidebarOptions,postChange) {
             self.sidebarOptions.mouse = null;
         });
         $(sidebar).on('click.collapse', '#collapse-sidebar', function () {
-            var isToOpen = false;
+            // var isToOpen = false;
             if(self.sidebarOptions.position==SIDEBAR_POSITION_BOTTOM) {
                 if(self.sidebarOptions.height>SIDEBAR_MIN_HEIGHT){
                     $('#'+resizerId).css({'display': 'none'});
@@ -113,7 +113,7 @@ var SidebarController = function (sidebarOptions,postChange) {
                     self.sidebarOptions.height = beforeCollapseHeight;
                     $(sidebar).css({'height': self.sidebarOptions.height+'px'});
                     $(this).find('.rotateble').css({'-webkit-transform': 'rotate(0deg)'});
-                    isToOpen = true;
+                    // isToOpen = true;
                 }
             } else if(self.sidebarOptions.position==SIDEBAR_POSITION_RIGHT){
                 if(self.sidebarOptions.width>SIDEBAR_MIN_WIDTH){
@@ -127,11 +127,11 @@ var SidebarController = function (sidebarOptions,postChange) {
                     self.sidebarOptions.width = beforeCollapseWidth;
                     $(sidebar).css({'width': self.sidebarOptions.width+'px'});
                     $(this).find('.rotateble').css({'-webkit-transform': 'rotate(-90deg)'});
-                    isToOpen = true;
+                    // isToOpen = true;
                 }
             }
-            if(isToOpen)
-                self.sidebarOptions.mouse = SIDEBAR_MOUSE_ON;
+            // if(isToOpen)
+            self.sidebarOptions.mouse = SIDEBAR_MOUSE_ON;
             postChange(self.sidebarOptions);
             self.sidebarOptions.mouse = null;
         });
@@ -336,19 +336,7 @@ var SidebarController = function (sidebarOptions,postChange) {
         $('#settings-sidebar-wrapper')
             .removeClass('dropup')
             .addClass('dropdown');
-    };
-
-    // var putFirstMenuTooltipUpToLeft = function(){
-    //     $('#menu-wrapper')
-    //         .find('div > .menu-button[data-toggle="tooltip"]')
-    //         .attr('data-placement','left');
-    // };
-    //
-    // var putFirstMenuTooltipLeftToUp = function(){
-    //     $('#menu-wrapper')
-    //         .find('div > .menu-button[data-toggle="tooltip"]')
-    //         .attr('data-placement','top');
-    // };
+    }
 
     function closeDropdown() {
         var dropdowns = $('.dropdown-toggle');

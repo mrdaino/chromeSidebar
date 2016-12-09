@@ -103,13 +103,17 @@ function mouseon() {
 
 function mouseout(sidebarOptions) {
     var $frame = $('#' + frameOptions.id);
-    var useFrameTransition;
+    var notUseFrameTransition;
     if (sidebarOptions.position == SIDEBAR_POSITION_BOTTOM) {
-        useFrameTransition = parseInt($frame.css('height'))<sidebarOptions.height;
+        var frameHeight = parseInt($frame.css('height'));
+        notUseFrameTransition = frameHeight<sidebarOptions.height
+            || frameHeight==sidebarOptions.parentHeight;
     } else if (sidebarOptions.position == SIDEBAR_POSITION_RIGHT) {
-        useFrameTransition = parseInt($frame.css('width'))<sidebarOptions.width;
+        var frameWidth = parseInt($frame.css('width'));
+        notUseFrameTransition = frameWidth<sidebarOptions.width
+            || frameWidth==sidebarOptions.parentWidth;
     }
-    if(useFrameTransition) {
+    if(notUseFrameTransition) {
         $frame.css({
             '-webkit-transition': 'height 0s, width 0s',
             'transition': 'height 0s, width 0s'
@@ -150,7 +154,7 @@ function mouseout(sidebarOptions) {
             });
         }
     }
-    if(useFrameTransition){
+    if(notUseFrameTransition){
         resetFrameTransition($frame);
     }
 }
@@ -161,5 +165,5 @@ function resetFrameTransition($frame){
             '-webkit-transition': 'height 0.5s, width 0.5s',
             'transition': 'height 0.5s, width 0.5s'
         });
-    },500);
+    },100);
 }

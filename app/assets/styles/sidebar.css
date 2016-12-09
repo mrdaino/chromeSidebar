@@ -18,8 +18,9 @@ body #sidebar-wrapper #menu-wrapper {
   position: absolute;
 }
 body #sidebar-wrapper #menu-wrapper label {
-  padding: 7px 6px 6px;
+  padding: 5px 6px 6px;
   margin: 0;
+  color: #5a5a5a;
 }
 body #sidebar-wrapper #menu-wrapper .dropdown,
 body #sidebar-wrapper #menu-wrapper .dropup {
@@ -174,7 +175,6 @@ body #sidebar-wrapper.bottom #content-wrapper {
   bottom: 0;
   left: 0;
   right: 0;
-  padding: 10px;
 }
 body #sidebar-wrapper.right {
   position: fixed;
@@ -217,4 +217,8 @@ body #sidebar-wrapper.right #content-wrapper {
   bottom: 0;
   top: 0;
   right: 0;
+}
+body #content-wrapper {
+  padding: 10px;
+  white-space: nowrap;
 }
