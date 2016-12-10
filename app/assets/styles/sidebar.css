@@ -170,7 +170,6 @@ body #sidebar-wrapper.bottom #sidebar-resizer-pro {
   z-index: 9999;
 }
 body #sidebar-wrapper.bottom #content-wrapper {
-  position: absolute;
   top: 30px;
   bottom: 0;
   left: 0;
@@ -212,7 +211,6 @@ body #sidebar-wrapper.right #sidebar-resizer-pro {
   z-index: 9999;
 }
 body #sidebar-wrapper.right #content-wrapper {
-  position: absolute;
   left: 30px;
   bottom: 0;
   top: 0;
@@ -221,4 +219,5 @@ body #sidebar-wrapper.right #content-wrapper {
 body #content-wrapper {
   padding: 10px;
   white-space: nowrap;
+  position: absolute;
 }

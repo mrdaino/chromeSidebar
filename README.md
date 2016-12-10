@@ -6,7 +6,7 @@ This is an extension for Google Chrome. A sidebar where you can inject your html
 
 You can add sidebar to your project like git submodule:
 ```bash
-git submodule add https://github.com/mrdaino/chromeSidebar.git
+git submodule add https://github.com/mrdaino/chromeSidebar.git sidebar
 ```
 download library through npm
 ```bash

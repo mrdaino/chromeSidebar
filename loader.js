@@ -59,9 +59,6 @@ function loadPageToInject() {
                 return false;
             },
             success: function(pageData){
-                page = new Page("","");
-                page.head = /<head.*?>([\s\S]*)<\/head>/.exec(pageData)[1];
-                page.body = /<body.*?>([\s\S]*)<\/body>/.exec(pageData)[1];
                 return true;
             }
         });
