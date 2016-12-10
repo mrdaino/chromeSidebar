@@ -49,10 +49,12 @@ function loadPageToInject() {
     if (resource != null) {
         var result = $.ajax({
             url: chrome.extension.getURL(resource),
-            type: 'GET',
+            type: 'POST',
             async: false,
             cache: false,
             timeout: 30000,
+            data: JSON.stringify(sidebarOptions),
+            contentType: "application/json; charset=utf-8",
             error: function(){
                 return false;
             },
